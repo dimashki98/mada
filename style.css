@@ -123,16 +123,12 @@ section {
     animation: pulse 1.5s infinite;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
+img {
+    max-width: 100%; /* تضمن أن الصورة لن تتجاوز عرض الصفحة */
+    height: auto; /* الحفاظ على نسب العرض إلى الارتفاع */
+    margin-top: 20px; /* إضافة مسافة بين الصورة والنص */
+    border-radius: 10px; /* إضافة زوايا مستديرة للصورة */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف للصورة */
 }
 
 footer {

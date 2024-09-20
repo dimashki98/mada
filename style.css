@@ -45,12 +45,12 @@ nav ul li a {
 }
 
 #hero h1 {
-    font-size: 4rem;
+    font-size: 3rem; /* تقليل حجم الخط */
     margin-bottom: 20px;
 }
 
 #hero p {
-    font-size: 1.5rem;
+    font-size: 1.2rem; /* تقليل حجم الخط */
     margin-bottom: 30px;
 }
 
@@ -84,7 +84,7 @@ nav ul li a {
 }
 
 section {
-    padding: 50px;
+    padding: 30px; /* تقليل الحشوة */
     text-align: center;
 }
 
@@ -99,7 +99,8 @@ section {
 
 .services-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center; /* مركزة العناصر */
+    flex-wrap: wrap; /* السماح بتغيير الصفوف */
     margin-top: 30px;
 }
 
@@ -107,7 +108,9 @@ section {
     background: #f3f4f6;
     padding: 20px;
     border-radius: 10px;
-    width: 30%;
+    width: 90%; /* عرض العناصر 90% */
+    max-width: 300px; /* أقصى عرض */
+    margin: 10px; /* إضافة مسافة بين العناصر */
 }
 
 .service h3 {
@@ -136,4 +139,24 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
+}
+
+/* تحسينات للجوالات */
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 2.5rem; /* تصغير حجم العنوان */
+    }
+
+    #hero p {
+        font-size: 1rem; /* تصغير النص */
+    }
+
+    .cta-btn, .whatsapp-btn {
+        font-size: 1rem; /* تصغير حجم الأزرار */
+        padding: 8px 16px; /* تقليل الحشوة */
+    }
+
+    .service {
+        width: 90%; /* عرض العناصر على الجوالات */
+    }
 }

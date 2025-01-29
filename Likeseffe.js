@@ -14,7 +14,7 @@ $(document).ready(function () {
     function launchConfetti() {
         for (let i = 0; i < 50; i++) {
             setTimeout(() => {
-                let confetti = $("<div class='confetti'></div>");
+                let confetti = $("<div class='confetti'>❤️</div>");
                 $("body").append(confetti);
 
                 let leftPosition = Math.random() * 100 + 'vw';
@@ -24,7 +24,12 @@ $(document).ready(function () {
                     'left': leftPosition,
                     'animation-duration': animationDuration,
                     'animation-timing-function': 'linear',
-                    'animation-name': 'fall'
+                    'animation-name': 'fall',
+                    'font-size': '24px',  // حجم القلب
+                    'color': 'red',        // لون القلب
+                    'position': 'fixed',
+                    'top': '0',
+                    'z-index': '9999'
                 });
 
                 setTimeout(() => {
@@ -43,16 +48,12 @@ $(document).ready(function () {
                 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
             }
             .confetti {
+                font-size: 24px; /* حجم القلب */
+                color: red;      /* لون القلب */
                 position: fixed;
                 top: 0;
-                width: 20px;
-                height: 20px;
-                background-color: red;
-                opacity: 0.9;
                 z-index: 9999;
                 animation: fall linear infinite;
-                border-radius: 50%;
-                clip-path: polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%);
             }
         `)
         .appendTo('head');

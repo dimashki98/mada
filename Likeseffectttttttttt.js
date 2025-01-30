@@ -40,12 +40,12 @@ $(document).ready(function () {
                     'animation-duration': animationDuration,  
                     'animation-timing-function': 'linear',  
                     'animation-name': 'fall',  
-                    'font-size': '80px',  // تكبير الحجم هنا إلى 80px
+                    'font-size': '80px',  // تحديد حجم الإيموجي هنا
                     'color': 'red',  
                     'position': 'fixed',  
                     'top': '0',  
-                    'z-index': '9999',
-                    'transform': 'scale(1.5)'  // إضافة مقياس لتكبير الإيموجي
+                    'z-index': '9999',  
+                    'transform': 'scale(1.5)'  // التأكد من زيادة الحجم باستخدام scale
                 });  
 
                 setTimeout(() => {  
@@ -69,7 +69,7 @@ $(document).ready(function () {
                 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }  
             }  
             .confetti {  
-                font-size: 80px;  /* تم تكبير الحجم إلى 80px */
+                font-size: 80px;  /* حجم الإيموجي */
                 color: red;  
                 position: fixed;  
                 top: 0;  

@@ -45,7 +45,7 @@ $(document).ready(function () {
                     'position': 'fixed',  
                     'top': '0',  
                     'z-index': '9999',  
-                    'transform': 'scale(1.5)'  // التأكد من زيادة الحجم باستخدام scale
+                    'transform': 'scale(3)'  // التأكد من زيادة الحجم بشكل كبير باستخدام scale
                 });  
 
                 setTimeout(() => {  

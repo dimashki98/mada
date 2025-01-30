@@ -1,21 +1,18 @@
 $(document).ready(function () {  
-    let isEffectRunning = false; // متغير للتحكم في تشغيل التأثير مرة واحدة فقط  
-    
-    // تابع لمراقبة العناصر المضافة في الصفحة  
-    const checkForNotifications = setInterval(function () {  
-        if (isEffectRunning) return; // إذا كان التأثير يعمل، لا تنفذ الكود مرة أخرى  
+    let lastNotification = ""; // لتخزين آخر إشعار ظهر  
 
+    const checkForNotifications = setInterval(function () {  
         $('div.break.fl').each(function () {  
-            const text = $(this).text();  
-            
-            if (  
+            const text = $(this).text().trim();  
+
+            if (text !== lastNotification && (  
                 text.includes('حصلت على إعجاب') ||  
                 text.includes('💋 أأأمـمـمـمـمـمـوأأااااحـح 💋') ||  
                 text.includes('❤️ أنـا أحٍـبَڪ') ||  
                 text.includes('💦 اااااخخخختتتتتتفففففففففوووووووووووووووووووووو') ||  
                 text.includes('ههههههههههههههههههههههههههههههههههههههههههههههههه')  
-            ) {  
-                isEffectRunning = true; // ضبط العلم لتجنب التشغيل المتكرر  
+            )) {  
+                lastNotification = text; // تحديث الإشعار الحالي  
                 startEmojiEffect(text);  
             }  
         });  
@@ -59,7 +56,6 @@ $(document).ready(function () {
         // إيقاف التأثير بعد ثانيتين  
         setTimeout(() => {  
             $(".confetti").remove(); // إزالة جميع الإيموجيات  
-            isEffectRunning = false; // إعادة تعيين المتغير للسماح بإشعار جديد  
         }, 2000);  
     }  
 

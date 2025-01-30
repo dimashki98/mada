@@ -40,7 +40,7 @@ $(document).ready(function () {
                     'animation-duration': animationDuration,  
                     'animation-timing-function': 'linear',  
                     'animation-name': 'fall',  
-                    'font-size': '24px',  
+                    'font-size': '80px',  // تكبير الحجم هنا إلى 80px
                     'color': 'red',  
                     'position': 'fixed',  
                     'top': '0',  
@@ -68,7 +68,7 @@ $(document).ready(function () {
                 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }  
             }  
             .confetti {  
-                font-size: 24px;  
+                font-size: 80px;  /* تم تكبير الحجم إلى 80px */
                 color: red;  
                 position: fixed;  
                 top: 0;  

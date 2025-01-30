@@ -19,33 +19,35 @@ $(document).ready(function () {
     }, 1000);
 
     function launchEmojiEffect(emoji) {
+        // مسح التأثير السابق (إذا كان هناك تأثير نشط)
+        $(".confetti").remove();
+
+        // إنشاء 50 إيموجي تسقط في نفس الوقت
         for (let i = 0; i < 50; i++) {
             setTimeout(() => {
                 let confetti = $("<div class='confetti'>" + emoji + "</div>");
                 $("body").append(confetti);
 
                 let leftPosition = Math.random() * 100 + 'vw';
-                let animationDuration = Math.random() * 3 + 2 + 's'; // السرعة الطبيعية
 
                 confetti.css({
                     'left': leftPosition,
-                    'animation-duration': animationDuration,
+                    'animation-duration': '2s', // مدة السقوط
                     'animation-timing-function': 'linear',
                     'animation-name': 'fall',
-                    'font-size': '48px', // تكبير الإيموجي
+                    'font-size': '60px', // تكبير الإيموجي
                     'color': 'red',
                     'position': 'fixed',
                     'top': '0',
                     'z-index': '9999'
                 });
-
-                setTimeout(() => {
-                    confetti.fadeOut(300, function () {
-                        $(this).remove();
-                    });
-                }, 1000); // حذف العنصر بعد ثانية واحدة من ظهوره
-            }, i * 100);
+            }, i * 50);
         }
+
+        // إيقاف التأثير بالكامل بعد ثانيتين
+        setTimeout(() => {
+            $(".confetti").remove();
+        }, 2000);
     }
 
     $('<style>')
@@ -56,7 +58,7 @@ $(document).ready(function () {
                 100% { transform: translateY(100vh) rotate(720deg); opacity: 1; }
             }
             .confetti {
-                font-size: 48px; /* تكبير حجم الإيموجي */
+                font-size: 60px; /* تكبير حجم الإيموجي */
                 color: red;
                 position: fixed;
                 top: 0;

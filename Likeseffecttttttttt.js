@@ -44,7 +44,8 @@ $(document).ready(function () {
                     'color': 'red',  
                     'position': 'fixed',  
                     'top': '0',  
-                    'z-index': '9999'  
+                    'z-index': '9999',
+                    'transform': 'scale(1.5)'  // إضافة مقياس لتكبير الإيموجي
                 });  
 
                 setTimeout(() => {  

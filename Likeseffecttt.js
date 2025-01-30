@@ -25,14 +25,14 @@ $(document).ready(function () {
                 $("body").append(confetti);
 
                 let leftPosition = Math.random() * 100 + 'vw';
-                let animationDuration = '1s'; // جعل التأثير يستمر لمدة ثانية واحدة فقط
+                let animationDuration = Math.random() * 3 + 2 + 's'; // السرعة الطبيعية
 
                 confetti.css({
                     'left': leftPosition,
                     'animation-duration': animationDuration,
                     'animation-timing-function': 'linear',
                     'animation-name': 'fall',
-                    'font-size': '24px',
+                    'font-size': '48px', // تكبير الإيموجي
                     'color': 'red',
                     'position': 'fixed',
                     'top': '0',
@@ -40,9 +40,11 @@ $(document).ready(function () {
                 });
 
                 setTimeout(() => {
-                    confetti.remove();
-                }, 1000); // إزالة العنصر بعد ثانية واحدة
-            }, i * 20); // تسريع توقيت كل عنصر ليكتمل التأثير في ثانية واحدة
+                    confetti.fadeOut(300, function () {
+                        $(this).remove();
+                    });
+                }, 1000); // حذف العنصر بعد ثانية واحدة من ظهوره
+            }, i * 100);
         }
     }
 
@@ -51,15 +53,15 @@ $(document).ready(function () {
         .html(`
             @keyframes fall {
                 0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-                100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+                100% { transform: translateY(100vh) rotate(720deg); opacity: 1; }
             }
             .confetti {
-                font-size: 24px;
+                font-size: 48px; /* تكبير حجم الإيموجي */
                 color: red;
                 position: fixed;
                 top: 0;
                 z-index: 9999;
-                animation: fall linear 1s; /* مدة الحركة ثانية واحدة فقط */
+                animation: fall linear;
             }
         `)
         .appendTo('head');

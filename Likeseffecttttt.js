@@ -1,6 +1,10 @@
 $(document).ready(function () {
+    let effectRunning = false; // متغير لمنع تشغيل التأثير مرتين متتاليتين
+
     // تابع لمراقبة العناصر المضافة في الصفحة
     const checkForNotifications = setInterval(function () {
+        if (effectRunning) return; // إذا كان التأثير يعمل، لا تشغل الكود مرة أخرى
+
         $('div.break.fl').each(function () {
             const text = $(this).text();
 
@@ -19,10 +23,9 @@ $(document).ready(function () {
     }, 1000);
 
     function launchEmojiEffect(emoji) {
-        // مسح التأثير السابق (إذا كان هناك تأثير نشط)
-        $(".confetti").remove();
+        effectRunning = true; // تحديد أن التأثير قيد التشغيل
 
-        // إنشاء 50 إيموجي تسقط في نفس الوقت
+        // إنشاء 50 إيموجي دفعة واحدة
         for (let i = 0; i < 50; i++) {
             setTimeout(() => {
                 let confetti = $("<div class='confetti'>" + emoji + "</div>");
@@ -35,7 +38,7 @@ $(document).ready(function () {
                     'animation-duration': '2s', // مدة السقوط
                     'animation-timing-function': 'linear',
                     'animation-name': 'fall',
-                    'font-size': '60px', // تكبير الإيموجي
+                    'font-size': '80px', // تكبير الإيموجي أكثر
                     'color': 'red',
                     'position': 'fixed',
                     'top': '0',
@@ -47,9 +50,11 @@ $(document).ready(function () {
         // إيقاف التأثير بالكامل بعد ثانيتين
         setTimeout(() => {
             $(".confetti").remove();
+            effectRunning = false; // السماح بتشغيل التأثير مجددًا عند ظهور إشعار جديد
         }, 2000);
     }
 
+    // إضافة أنيميشن السقوط
     $('<style>')
         .prop('type', 'text/css')
         .html(`
@@ -58,7 +63,7 @@ $(document).ready(function () {
                 100% { transform: translateY(100vh) rotate(720deg); opacity: 1; }
             }
             .confetti {
-                font-size: 60px; /* تكبير حجم الإيموجي */
+                font-size: 80px; /* تكبير الإيموجي أكثر */
                 color: red;
                 position: fixed;
                 top: 0;

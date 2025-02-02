@@ -1,7 +1,34 @@
 $(document).ready(function () {  
     let lastNotification = ""; // لتخزين آخر إشعار ظهر  
+    let effectsEnabled = true; // للتحكم في تشغيل وإيقاف التأثيرات  
 
+    // إنشاء الزر لتشغيل/إيقاف التأثيرات
+    const toggleButton = $('<label></label>')
+        .text('إيقاف التأثيرات')
+        .addClass('label tc border btn label-info fl')
+        .css({
+            'background-color': 'ghostwhite',
+            'color': 'black',
+            'margin': '1px 4px',
+            'padding': '6px',
+            'width': '98%'
+        })
+        .prepend('<span class="fl fa fa-stop" style="font-family: FontAwesome, sans-serif;"></span> ')
+        .click(function() {
+            effectsEnabled = !effectsEnabled; // عكس حالة التشغيل
+            $(this).text(effectsEnabled ? 'إيقاف التأثيرات' : 'تشغيل التأثيرات')
+                .prepend(effectsEnabled 
+                    ? '<span class="fl fa fa-stop" style="font-family: FontAwesome, sans-serif;"></span> ' 
+                    : '<span class="fl fa fa-play" style="font-family: FontAwesome, sans-serif;"></span> ');
+        });
+
+    // إضافة الزر إلى القائمة
+    $('#newoption .not_geri').append(toggleButton);
+
+    // فحص الإشعارات بشكل دوري
     const checkForNotifications = setInterval(function () {  
+        if (!effectsEnabled) return; // إذا كانت التأثيرات متوقفة، لا تعمل  
+
         $('div.break.fl').each(function () {  
             const text = $(this).text().trim();  
 
@@ -19,6 +46,8 @@ $(document).ready(function () {
     }, 1000); // التحقق كل ثانية  
 
     function startEmojiEffect(text) {  
+        if (!effectsEnabled) return; // إيقاف التأثيرات إذا كانت معطلة  
+
         let emoji = '';  
 
         if (text.includes('حصلت على إعجاب')) emoji = '❤️';  
@@ -27,8 +56,10 @@ $(document).ready(function () {
         else if (text.includes('💦 اااااخخخختتتتتتفففففففففوووووووووووووووووووووو')) emoji = '💦';  
         else if (text.includes('ههههههههههههههههههههههههههههههههههههههههههههههههه')) emoji = '🤣';  
 
-        for (let i = 0; i < 25; i++) { // تغيير العدد إلى 25
+        for (let i = 0; i < 25; i++) {  
             setTimeout(() => {  
+                if (!effectsEnabled) return; // إذا أُوقفت التأثيرات أثناء التشغيل، لا يتم إنشاء عناصر جديدة  
+
                 let confetti = $("<div class='confetti'>" + emoji + "</div>");  
                 $("body").append(confetti);  
 

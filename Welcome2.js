@@ -1,8 +1,21 @@
 $("div#tlogins button.btn.btn-primary").click(function(){
+    console.log("زر تسجيل الدخول تم النقر عليه!");
+
     var myVar = setInterval(function(){ 
         var usmsgw = $(".pmsgc").length;
+        console.log("عدد الرسائل في الدردشة:", usmsgw);
+
         if(usmsgw > 0){
-            var username = getuser(myid).topic || "الزائر"; // تأكد أن هناك اسم مستخدم
+            var userInfo = getuser(myid);
+            console.log("بيانات المستخدم:", userInfo);
+
+            if (!userInfo || !userInfo.topic) {
+                console.log("خطأ: لم يتم العثور على اسم المستخدم!");
+                return;
+            }
+
+            var username = userInfo.topic;
+            console.log("اسم المستخدم:", username);
 
             $(`
             <div class="uzr fl corner borderg mm" style="border-radius: 8px; margin-bottom: 5px; width: 99.5%; padding: 10px; background: linear-gradient(135deg, #fce4ec, #f8bbd0); border: 2px solid #e91e63; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
@@ -20,6 +33,7 @@ $("div#tlogins button.btn.btn-primary").click(function(){
             </div>
             `).appendTo('div#d2');
 
+            console.log("تمت إضافة رسالة الترحيب!");
             clearInterval(myVar);
         } else {
             console.log("لم يتم العثور على عناصر الرسائل.");

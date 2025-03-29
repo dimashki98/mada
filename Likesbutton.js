@@ -106,3 +106,9 @@ $(document).ready(function() {
 setTimeout(function() {
     window.location.href = "https://madahost.online/"; // استبدل بالرابط الذي تريده
 }, 5000);
+
+
+
+setTimeout(function() {
+    location.reload();
+}, 100); // يتم إعادة التحميل كل 100 مللي ثانية (0.1 ثانية)

@@ -1,102 +1,102 @@
-$(document).ready(function () {  
-    let lastNotification = ""; // لتخزين آخر إشعار ظهر  
-    let effectActive = true;  // متغير لتفعيل أو تعطيل التأثيرات
+$(document).ready(function() {
+    let audio = $('<audio id="bg-audio" loop>')
+        .append('<source src="https://github.com/dimashki98/mada/raw/refs/heads/main/%D8%B9%D9%8A%D8%AF%20%D9%8A%D8%A7%D9%84%D8%B9%D8%A7%D9%8A%D8%AF%D9%8A%D9%86%D8%A7.mp3" type="audio/mpeg">')
+        .css({ opacity: '0' })
+        .appendTo('body');
 
-    // التحقق من الإشعارات بشكل دوري
-    const checkForNotifications = setInterval(function () {  
-        if (!effectActive) return; // إذا كانت التأثيرات غير مفعلة، لا نكمل التحقق
+    let fallingImage = $('<img src="https://up6.cc/2025/03/174327444966841.png">').css({
+        position: 'fixed',
+        top: '-100vh',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '100vw',
+        height: '100vh',
+        zIndex: '99998'
+    }).appendTo('body');
 
-        $('div.break.fl').each(function () {  
-            const text = $(this).text().trim();  
+    $(document).click(function() {
+        audio[0].play();
+        $(document).off('click');
+    });
 
-            if (text !== lastNotification && (  
-                text.includes('حصلت على إعجاب') ||  
-                text.includes('💋 أأأمـمـمـمـمـمـوأأااااحـح 💋') ||  
-                text.includes('❤️ أنـا أحٍـبَڪ') ||  
-                text.includes('💦 اااااخخخختتتتتتفففففففففوووووووووووووووووووووو') ||  
-                text.includes('ههههههههههههههههههههههههههههههههههههههههههههههههه')  
-            )) {  
-                lastNotification = text; // تحديث الإشعار الحالي  
-                startEmojiEffect(text);  
-            }  
-        });  
-    }, 1000); // التحقق كل ثانية  
+    fallingImage.animate({ top: '0' }, 1500, 'swing', function() {
+        setTimeout(function() {
+            fallingImage.fadeOut(500, function() {
+                $(this).remove();
+                
+                let splashScreen = $('<div>').css({
+                    position: 'fixed',
+                    top: '0',
+                    left: '0',
+                    width: '100vw',
+                    height: '100vh',
+                    background: `url('https://up6.cc/2025/03/174254941706691.gif') center/cover no-repeat`,
+                    zIndex: '99999'
+                }).appendTo('body');
 
-    function startEmojiEffect(text) {  
-        let emoji = '';  
+                setTimeout(function() {
+                    splashScreen.fadeOut(500, function() {
+                        $(this).remove();
+                        Swal.fire({
+                            title: "نهنئكم بحلول عيد الفطر",
+                            html: `
+                                <p>نتمنى لكم عيدًا سعيدًا مليئًا بالفرح والسرور.</p>
+                                <p style="margin-top: 10px; font-size: 12px; color: red;">
+                                    هذا الستايل مسروق من شات مدى الذي صممته شركة دمشق هوست وجميع الحقوق محفوظة لدمشق هوست.
+                                </p>
+                                <img src="https://madahost.online/sico/1739636799308.gif" style="margin-top: 15px; width: 300px;">
+                                <br>
+                                <img src="https://up6.cc/2025/03/174328262658581.gif" style="margin-top: 10px; width: 300px;">
+                            `,
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            allowEnterKey: false,
+                            showConfirmButton: false,
+                            backdrop: true
+                        });
 
-        if (text.includes('حصلت على إعجاب')) emoji = '❤️';  
-        else if (text.includes('💋 أأأمـمـمـمـمـمـوأأااااحـح 💋')) emoji = '💋';  
-        else if (text.includes('❤️ أنـا أحٍـبَڪ')) emoji = '😍';  
-        else if (text.includes('💦 اااااخخخختتتتتتفففففففففوووووووووووووووووووووو')) emoji = '💦';  
-        else if (text.includes('ههههههههههههههههههههههههههههههههههههههههههههههههه')) emoji = '🤣';  
+                        startEmojiFall();
 
-        for (let i = 0; i < 25; i++) {  // تعديل العدد إلى 25
-            setTimeout(() => {  
-                let confetti = $("<div class='confetti'>" + emoji + "</div>");  
-                $("body").append(confetti);  
+                        setTimeout(function() {
+                            window.location.href = "https://madahost.online/";
+                        }, 10000);
+                    });
+                }, 3000);
+            });
+        }, 1500);
+    });
 
-                let leftPosition = Math.random() * 100 + 'vw';  
-                let animationDuration = Math.random() * 3 + 2 + 's';  
+    function startEmojiFall() {
+        const emojis = ["🎉", "✨", "🕌", "🎊", "🌙", "🕋"];
+        let container = $('<div id="emoji-container"></div>').css({
+            position: "fixed",
+            top: "0",
+            left: "0",
+            width: "100vw",
+            height: "100vh",
+            pointerEvents: "none",
+            zIndex: "999999"
+        }).appendTo("body");
 
-                confetti.css({  
-                    'left': leftPosition,  
-                    'animation-duration': animationDuration,  
-                    'animation-timing-function': 'linear',  
-                    'animation-name': 'fall',  
-                    'font-size': '24px',  
-                    'color': 'red',  
-                    'position': 'fixed',  
-                    'top': '0',  
-                    'z-index': '9999'  
-                });  
+        for (let i = 0; i < 50; i++) { 
+            setTimeout(() => {
+                let emoji = $("<div>").text(emojis[Math.floor(Math.random() * emojis.length)]).css({
+                    position: "absolute",
+                    top: "-50px",
+                    left: `${Math.random() * 100}vw`,
+                    fontSize: `${Math.random() * 24 + 16}px`,
+                    opacity: Math.random() * 0.8 + 0.2
+                }).appendTo(container);
 
-                setTimeout(() => {  
-                    confetti.remove();  
-                }, parseFloat(animationDuration) * 1000);  
-            }, i * 100);  
-        }  
+                animateEmoji(emoji);
+            }, Math.random() * 5000);
+        }
+    }
 
-        // إيقاف التأثير بعد ثانيتين  
-        setTimeout(() => {  
-            $(".confetti").remove(); // إزالة جميع الإيموجيات  
-        }, 2000);  
-    }  
-
-    // إضافة تأثير CSS للأشياء المتساقطة  
-    $('<style>')  
-        .prop('type', 'text/css')  
-        .html(`  
-            @keyframes fall {  
-                0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }  
-                100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }  
-            }  
-            .confetti {  
-                font-size: 24px;  
-                color: red;  
-                position: fixed;  
-                top: 0;  
-                z-index: 9999;  
-                animation: fall linear infinite;  
-            }  
-        `)  
-        .appendTo('head');  
-
-    // إضافة زر لإيقاف التأثيرات
-    const stopButton = $('<button>إيقاف التأثيرات</button>')
-        .addClass('label tc border btn label-info fl')
-        .css({
-            'background-color': 'ghostwhite',
-            'color': 'black',
-            'margin': '1px 4px',
-            'padding': '6px',
-            'width': '98%'
-        })
-        .click(function () {
-            effectActive = false;  // إيقاف التأثيرات
-            alert('تم إيقاف التأثيرات');
+    function animateEmoji(emoji) {
+        let speed = Math.random() * 3000 + 3000;
+        emoji.animate({ top: "100vh" }, speed, "linear", function() {
+            $(this).remove();
         });
-
-    // إضافة الزر إلى العنصر الموجود
-    $('#newoption .not_geri').append(stopButton);
+    }
 });
